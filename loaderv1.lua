@@ -1,15 +1,28 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/sametexe001/sametlibs/refs/heads/main/Kiwisense/Library.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/JayTotuff/uilib/refs/heads/main/src/Library.lua"))()
 
---
--- Example
+
 do
-    local Window = Library:Window({
-        Name = "kiwisense",
-        Version = "v2.1",
-        Logo = "135215559087473",
-        FadeSpeed = 0.25,
-    	Size = UDim2.fromOffset(300, 270),
-    })
+local Camera = workspace.CurrentCamera
+local ViewportSize = Camera.ViewportSize
+
+local IsMobile = game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService").MouseEnabled
+
+local WindowSize
+if IsMobile then
+    -- Mobile: Use 85% of screen width and 70% of screen height
+    WindowSize = UDim2.new(0, ViewportSize.X * 0.85, 0, ViewportSize.Y * 0.7)
+else
+    -- Desktop: Use 45% of screen width and 60% of screen height
+    WindowSize = UDim2.new(0, ViewportSize.X * 0.45, 0, ViewportSize.Y * 0.6)
+end
+
+local Window = Library:Window({
+    Name = "kiwisense",
+    Version = "v2.1",
+    Logo = "135215559087473",
+    FadeSpeed = 0.25,
+    Size = WindowSize
+})
 
     local ESPPreview = Library:ESPPreview({
         MainFrame = Window.Items["MainFrame"] -- keep this
